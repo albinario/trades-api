@@ -1,5 +1,6 @@
-import express from "express"
+import express from 'express'
 import playerRouter from './resources/player/player.router'
+import { validate } from './middlewares/auth/validate'
 
 const router = express.Router()
 
@@ -9,6 +10,6 @@ router.get('/', async (req, res) => {
 	})
 })
 
-router.use('/players', playerRouter)
+router.use('/players', validate, playerRouter)
 
 export default router
