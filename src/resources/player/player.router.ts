@@ -8,4 +8,6 @@ router.get('/:playerId', playerController.show)
 
 router.post('/', playerController.store)
 
+router.patch('/:playerId', playerController.update)
+
 export default router

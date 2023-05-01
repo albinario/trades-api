@@ -28,7 +28,7 @@ export const show = async (req: Request, res: Response) => {
 	const playerId = req.params.playerId
 
 	try {
-		const player = await Player.findById(playerId)
+		const player = await Player.findOne({ id: playerId })
 
 		if (!player) {
 			return res.sendStatus(404)
@@ -65,7 +65,7 @@ export const store = async (req: Request, res: Response) => {
 
 		if (err instanceof mongoose.Error.ValidationError) {
 			return res.status(400).send({
-				status: 'error',
+				status: 'fail',
 				message: err.message
 			})
 		}
@@ -73,6 +73,45 @@ export const store = async (req: Request, res: Response) => {
 		res.status(500).send({
 			status: 'error',
 			message: "Error thrown when creating a new player"
+		})
+	}
+}
+
+export const update = async (req: Request, res: Response) => {
+	const playerId = req.params.playerId
+
+	try {
+		const player = await Player.findOne({ id: playerId })
+
+		if (!player) {
+			return res.status(404).send({
+				status: 'fail',
+				message: "No player with this id"
+			})
+		}
+
+		await player.update({ picker: req.body.picker })
+
+		res.status(200).send({
+			status: 'success',
+			message: `${req.body.picker} has picked ${player.name}`
+		})
+
+		const err = new Error()
+
+	} catch (err) {
+		debug("Error thrown when updating player", err)
+
+		if (err instanceof mongoose.Error.ValidationError) {
+			return res.status(400).send({
+				status: 'fail',
+				message: err.message
+			})
+		}
+
+		res.status(500).send({
+			status: 'error',
+			message: "Error thrown when updating player"
 		})
 	}
 }
