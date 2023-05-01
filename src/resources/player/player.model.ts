@@ -1,25 +1,26 @@
 import { model, Schema, Document } from 'mongoose'
 
 export interface IPlayer extends Document {
-	name: string,
 	picker: string,
-	jersey: string,
+	name: string,
+	jersey: number,
 	pos: string,
 	team: number,
 	id: number
 }
 
 const PlayerSchema: Schema = new Schema<IPlayer>({
+	picker: {
+		type: String,
+		maxlength: 1
+	},
 	name: {
 		type: String,
 		required: true,
 		trim: true
 	},
-	picker: {
-		type: String
-	},
 	jersey: {
-		type: String,
+		type: Number,
 		required: true
 	},
 	pos: {
