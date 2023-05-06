@@ -90,11 +90,32 @@ export const update = async (req: Request, res: Response) => {
 			})
 		}
 
-		await player.update({ picker: req.body.picker })
+		if (req.body.picker) {
+			await player.update({ picker: req.body.picker })
+		}
+
+		if (req.body.jersey) {
+			await player.update({ jersey: req.body.jersey })
+		}
+
+		if (req.body.pos) {
+			await player.update({ pos: req.body.pos })
+		}
+
+		if (req.body.team) {
+			await player.update({ team: req.body.team })
+		}
 
 		res.status(200).send({
 			status: 'success',
-			message: `${req.body.picker} has picked ${player.name}`
+			data: {
+				picker: req.body.picker ? req.body.picker : player.picker,
+				name: player.name,
+				jersey: req.body.jersey ? req.body.jersey : player.jersey,
+				pos: req.body.pos ? req.body.pos : player.pos,
+				team: req.body.team ? req.body.team : player.team,
+				id: player.id
+			}
 		})
 
 		const err = new Error()
