@@ -90,20 +90,24 @@ export const update = async (req: Request, res: Response) => {
 			})
 		}
 
-		if (req.body.picker) {
-			await player.update({ picker: req.body.picker })
-		}
-
-		if (req.body.jersey) {
-			await player.update({ jersey: req.body.jersey })
-		}
-
-		if (req.body.pos) {
-			await player.update({ pos: req.body.pos })
-		}
-
-		if (req.body.team) {
-			await player.update({ team: req.body.team })
+		if (!req.body.picker && !req.body.jersey && !req.body.pos && !req.body.team) {
+			await player.update({ picker: "" })
+		} else {
+			if (req.body.picker) {
+				await player.update({ picker: req.body.picker })
+			}
+			
+			if (req.body.jersey) {
+				await player.update({ jersey: req.body.jersey })
+			}
+			
+			if (req.body.pos) {
+				await player.update({ pos: req.body.pos })
+			}
+			
+			if (req.body.team) {
+				await player.update({ team: req.body.team })
+			}
 		}
 
 		res.status(200).send({
