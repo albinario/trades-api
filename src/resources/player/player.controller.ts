@@ -79,10 +79,11 @@ export const store = async (req: Request, res: Response) => {
 
 export const update = async (req: Request, res: Response) => {
 	const playerId = req.params.playerId
-
+	
+	
 	try {
 		const player = await Player.findOne({ id: playerId })
-
+		
 		if (!player) {
 			return res.status(404).send({
 				status: 'fail',
@@ -90,8 +91,10 @@ export const update = async (req: Request, res: Response) => {
 			})
 		}
 
-		if (!req.body.picker && !req.body.jersey && !req.body.pos && !req.body.team) {
-			await player.update({ picker: "" })
+		const noValues = !req.body.picker && !req.body.jersey && !req.body.pos && !req.body.team
+
+		if (noValues) {
+			await player.update({ picker: '' })
 		} else {
 			if (req.body.picker) {
 				await player.update({ picker: req.body.picker })
@@ -110,10 +113,10 @@ export const update = async (req: Request, res: Response) => {
 			}
 		}
 
-		res.status(200).send({
+		return res.status(200).send({
 			status: 'success',
 			data: {
-				picker: req.body.picker ? req.body.picker : player.picker,
+				picker: noValues ? '' : (req.body.picker ? req.body.picker : player.picker),
 				name: player.name,
 				jersey: req.body.jersey ? req.body.jersey : player.jersey,
 				pos: req.body.pos ? req.body.pos : player.pos,
