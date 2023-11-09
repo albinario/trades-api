@@ -3,7 +3,7 @@ import Debug from 'debug'
 import { Player } from './player.model'
 import mongoose from 'mongoose'
 
-const debug = Debug('lmdb:player.controller')
+const debug = Debug('trades:player.controller')
 
 export const index = async (req: Request, res: Response) => {
 	try {
@@ -58,8 +58,6 @@ export const store = async (req: Request, res: Response) => {
 			data: player
 		})
 
-		const err = new Error()
-
 	} catch (err) {
 		debug("Error thrown when creating player", err)
 
@@ -79,8 +77,7 @@ export const store = async (req: Request, res: Response) => {
 
 export const update = async (req: Request, res: Response) => {
 	const playerId = req.params.playerId
-	
-	
+
 	try {
 		const player = await Player.findOne({ id: playerId })
 		
@@ -108,8 +105,8 @@ export const update = async (req: Request, res: Response) => {
 				await player.update({ pos: req.body.pos })
 			}
 			
-			if (req.body.team) {
-				await player.update({ team: req.body.team })
+			if (req.body.teamAbbrev) {
+				await player.update({ teamAbbrev: req.body.teamAbbrev })
 			}
 		}
 
@@ -120,7 +117,7 @@ export const update = async (req: Request, res: Response) => {
 				name: player.name,
 				jersey: req.body.jersey ? req.body.jersey : player.jersey,
 				pos: req.body.pos ? req.body.pos : player.pos,
-				team: req.body.team ? req.body.team : player.team,
+				teamAbbrev: req.body.teamAbbrev ? req.body.teamAbbrev : player.teamAbbrev,
 				id: player.id
 			}
 		})

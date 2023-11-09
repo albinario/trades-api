@@ -5,7 +5,7 @@ export interface IPlayer extends Document {
 	name: string,
 	jersey: number,
 	pos: string,
-	team: number,
+	teamAbbrev: string,
 	id: number
 }
 
@@ -28,8 +28,8 @@ const PlayerSchema: Schema = new Schema<IPlayer>({
 		required: true,
 		maxlength: 1
 	},
-	team: {
-		type: Number,
+	teamAbbrev: {
+		type: String,
 		required: true
 	},
 	id: {
