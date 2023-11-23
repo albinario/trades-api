@@ -87,26 +87,25 @@ export const update = async (req: Request, res: Response) => {
 				message: "No player with this id"
 			})
 		}
-
-		const noValues = !req.body.picker && !req.body.jersey && !req.body.pos && !req.body.team
+		const noValues = !req.body.picker && !req.body.jersey && !req.body.pos && !req.body.teamAbbrev
 
 		if (noValues) {
-			await player.update({ picker: '' })
+			await player.updateOne({ picker: '' })
 		} else {
 			if (req.body.picker) {
-				await player.update({ picker: req.body.picker })
+				await player.updateOne({ picker: req.body.picker })
 			}
 			
 			if (req.body.jersey) {
-				await player.update({ jersey: req.body.jersey })
+				await player.updateOne({ jersey: req.body.jersey })
 			}
 			
 			if (req.body.pos) {
-				await player.update({ pos: req.body.pos })
+				await player.updateOne({ pos: req.body.pos })
 			}
 			
 			if (req.body.teamAbbrev) {
-				await player.update({ teamAbbrev: req.body.teamAbbrev })
+				await player.updateOne({ teamAbbrev: req.body.teamAbbrev })
 			}
 		}
 
