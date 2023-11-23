@@ -10,7 +10,7 @@ export const connect = async () => {
 	}
 
 	// prepare for Mongoose 7
-	// mongoose.set('strictQuery', false)
+	mongoose.set('strictQuery', false)
 
 	const connection = await mongoose.connect(process.env.DATABASE_URL, {
 		useNewUrlParser: true,
@@ -19,5 +19,5 @@ export const connect = async () => {
 
 	db = connection
 
-	console.log("🥳 We're connected to MongoDB Atlas!")
+	console.log('🔌 Connected to MongoDB Atlas!')
 }
