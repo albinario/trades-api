@@ -1,7 +1,8 @@
 {
-  "jsxSingleQuote": true,
-  "semi": false,
-  "singleQuote": true,
-  "tabWidth": 2,
-  "useTabs": true
+	"jsxSingleQuote": true,
+	"semi": false,
+	"singleQuote": true,
+	"tabWidth": 2,
+	"prettier.trailingComma": "none",
+	"useTabs": true
 }
