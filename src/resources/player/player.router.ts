@@ -1,6 +1,7 @@
 import express from 'express'
-const router = express.Router()
 import * as playerController from './player.controller'
+
+const router = express.Router()
 
 router.get('/', playerController.index)
 

@@ -21,7 +21,8 @@ connect()
 	.then(() => {
 		// Start responding to incoming requests
 		server.listen(PORT)
-	}).catch(err => {
+	})
+	.catch((err) => {
 		console.error(err)
 		process.exit(1)
 	})
@@ -31,16 +32,16 @@ connect()
  */
 server.on('error', (err: NodeJS.ErrnoException) => {
 	if (err.syscall !== 'listen') {
-		throw err;
+		throw err
 	}
 
 	switch (err.code) {
 		case 'EACCES':
-			console.error(`🦸🏻 Port ${PORT} requires elevated privileges`)
+			console.error(`Port ${PORT} requires elevated privileges`)
 			process.exit(1)
 			break
 		case 'EADDRINUSE':
-			console.error(`🛑 Port ${PORT} is already in use`)
+			console.error(`Port ${PORT} is already in use`)
 			process.exit(1)
 			break
 		default:
@@ -52,5 +53,5 @@ server.on('error', (err: NodeJS.ErrnoException) => {
  * Event listener for HTTP server "listening" event.
  */
 server.on('listening', () => {
-	console.log(`🧑🏻‍🍳 Yay, server started on http://localhost:${PORT}`)
+	console.log(`💥 Server started on http://localhost:${PORT}`)
 })

@@ -5,7 +5,7 @@ const router = express.Router()
 
 router.get('/', async (req, res) => {
 	res.send({
-		message: "This is the Trades API",
+		message: 'This is the Trades API',
 	})
 })
 
